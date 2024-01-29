@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator- Prashanth Kumar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+        font-family: Arial, sans-serif;
+        
+        color: red 
+    }
+    #bmi-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      width: 300px;
+    }
+    h3 {
+        color:rgb(0, 65, 218)
+    }
+    #bmi-result {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #2c8b2f;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    p{
+        color: rgb(40, 38, 85);
+    }
+
+    button:hover {
+      background-color: #c72e00;
+    }
+  </style>
+</head>
+<body>
+
+<div id="bmi-container">
+  <h1>BMI Calculator</h1>
+  <h3>(Body Mass Index)</h3>
+  <form id="bmi-form">
+    <label for="name"><b>Name (optional):</b></label><br>
+    <input type="text" id="name">
+    <br>
+    <label for="weight"><b>Weight (kg):</b></label><br>
+    <input type="number" id="weight" required>
+    <br>
+    <label for="height"><b>Height (cm):</b></label><br>
+    <input type="number" id="height" required>
+    <br>
+    <button type="button" onclick="calculateBMI()"><b>Calculate BMI</b></button>
+    <p><i><b>Admin:</b> Prashanth Kumar Suddala</i></p>
+  </form>
+  <div id="bmi-result"></div>
+</div>
+
+<script>
+  function calculateBMI() {
+    var name = document.getElementById('name').value;
+    var weight = document.getElementById('weight').value;
+    var height = document.getElementById('height').value;
+
+    if (weight && height) {
+      var bmi = (weight / Math.pow(height / 100, 2)).toFixed(2);
+      displayResult(name, bmi);
+    } else {
+      alert('Please enter both weight and height.');
+    }
+  }
+
+  function displayResult(name, bmi) {
+    var resultContainer = document.getElementById('bmi-result');
+    var message = '';
+
+    if (name) {
+      resultContainer.innerHTML = 'Hi ' + name + '! ';
+    }
+
+    resultContainer.innerHTML += 'Your BMI is: ' + bmi;
+
+    if (bmi < 18.5) {
+      message = 'Underweight - Consider gaining some weight.';
+    } else if (bmi >= 18.5 && bmi < 25) {
+      message = 'Normal weight - Keep it up!'
+    ;
+    } else if (bmi >= 25 && bmi < 30) {
+      message = 'Overweight - Consider losing some weight for better health.';
+    } else {
+      message = 'Obese - It is advisable to consult with a healthcare professional.';
+    }
+
+    resultContainer.innerHTML += '<br>' + message;
+
+    // Additional visual effects (you can customize this part)
+    if (bmi < 18.5) {
+      resultContainer.style.color = '#384ca8'; // Blue for underweight
+    } else if (bmi >= 18.5 && bmi < 25) {
+      resultContainer.style.color = '#0c8f03'; // Green for normal weight
+    } else if (bmi >= 25 && bmi < 30) {
+      resultContainer.style.color = '#de760d'; // Orange for overweight
+    } else {
+      resultContainer.style.color = '#960606'; // Red for obese
+    }
+  }
+</script>
+
+</body>
+</html>
