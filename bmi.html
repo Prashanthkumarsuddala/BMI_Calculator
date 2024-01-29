@@ -102,6 +102,8 @@
   function displayResult(name, bmi) {
     var resultContainer = document.getElementById('bmi-result');
     var message = '';
+    resultContainer.innerHTML = '';
+
 
     if (name) {
       resultContainer.innerHTML = 'Hi ' + name + '! ';
